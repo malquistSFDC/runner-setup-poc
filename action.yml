@@ -10,6 +10,7 @@ runs:
   steps:
     - name: adding github workspace as safe directory
       run: git config --global --add safe.directory $GITHUB_WORKSPACE
+      shell: bash
     - uses: actions/checkout@v4
     - name: Install Java and Other Dependencies
       run: |
