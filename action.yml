@@ -13,11 +13,12 @@ runs:
       shell: bash
     - uses: actions/checkout@v4
     - name: Install TZ Data
-      run: sudo apt-get update -y && DEBIAN_FRONTEND=noninteractive TZ=US apt-get install -y tzdata
+      run: sudo apt-get update -y && DEBIAN_FRONTEND=noninteractive TZ=US sudo apt-get install -y tzdata
       shell: bash
 
     - name: Install Java and Other Components
       run: |
+        sudo apt-get update && \
         sudo apt-get install -y \
         software-properties-common \
         jq \
