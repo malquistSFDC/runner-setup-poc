@@ -12,15 +12,11 @@ runs:
       run: git config --global --add safe.directory $GITHUB_WORKSPACE
       shell: bash
     - uses: actions/checkout@v4
-    - name: Install TZ Data
-      run: sudo apt-get update -y && DEBIAN_FRONTEND=noninteractive TZ=US sudo apt-get install -y tzdata
-      shell: bash
 
-    - name: Install Java and Other Components
+    - name: Install Python3-Pip
       run: |
         sudo apt-get update && \
         sudo apt-get install -y \
-        default-jdk \
         python3-pip
       shell: bash
 
@@ -29,7 +25,6 @@ runs:
       with:
         node-version: ${{ inputs.node-version }}
         cache: npm
-
 
     - name: Install Salesforce CLI, Vlocity, and Plugins
       run: |
@@ -40,8 +35,3 @@ runs:
     - name: Install Python Plugins
       run: python3 -m pip install pyyaml
       shell: bash
-
-    # - name: Give Root Access To Running User
-    #   run: |
-    #     chmod -R go+rwx ${HOME} &&\
-    #     chmod -R go+rwx /root
