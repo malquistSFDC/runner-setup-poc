@@ -20,12 +20,6 @@ runs:
       run: |
         sudo apt-get update && \
         sudo apt-get install -y \
-        software-properties-common \
-        jq \
-        unzip \
-        curl \
-        gnupg \
-        gpg \
         default-jdk \
         python3-pip
       shell: bash
@@ -34,6 +28,8 @@ runs:
       uses: actions/setup-node@v4
       with:
         node-version: ${{ inputs.node-version }}
+        cache: npm
+
 
     - name: Install Salesforce CLI, Vlocity, and Plugins
       run: |
