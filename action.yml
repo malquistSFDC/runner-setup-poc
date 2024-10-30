@@ -1,0 +1,46 @@
+name: Runner Setup POC
+description: Set up the environment of a GitHub-hosted runner using this composite action.
+inputs:
+  node-version:
+    description: 'Node Version'
+    required: true
+    default: '18'
+runs:
+  using: 'composite'
+  steps:
+    - uses: actions/checkout@v4
+    - name: Install Java and Other Dependencies
+      run: |
+        sudo apt-get update -y &&\
+        DEBIAN_FRONTEND=noninteractive TZ=US apt-get install -y tzdata
+
+        sudo apt-get install -y \
+        software-properties-common \
+        jq \
+        unzip \
+        curl \
+        gnupg \
+        gpg \
+        default-jdk \
+        python3-pip
+      shell: bash
+
+    - name: Install Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ inputs.node-version }}
+
+    - name: Install Salesforce CLI, Vlocity, and Plugins
+      run: |
+        npm install --global @salesforce/cli vlocity dotenv-cli &&\
+        echo "y" | sf plugins install @salesforce/sfdx-scanner @salesforce/acu-pack@2.0.4
+      shell: bash
+
+    - name: Install Python Plugins
+      run: python3 -m pip install pyyaml
+      shell: bash
+
+    # - name: Give Root Access To Running User
+    #   run: |
+    #     chmod -R go+rwx ${HOME} &&\
+    #     chmod -R go+rwx /root
