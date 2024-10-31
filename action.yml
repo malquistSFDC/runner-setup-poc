@@ -44,7 +44,7 @@ runs:
     - name: Install Salesforce CLI, Vlocity, and Plugins
       if: steps.npm-cache.outputs.cache-hit != 'true'
       run: |
-        npm install @salesforce/cli vlocity dotenv-cli &&\
+        npm install --global @salesforce/cli vlocity dotenv-cli &&\
         echo "y" | sf plugins install @salesforce/sfdx-scanner @salesforce/acu-pack@2.0.4
       shell: bash
 
