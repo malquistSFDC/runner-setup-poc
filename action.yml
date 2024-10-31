@@ -30,6 +30,7 @@ runs:
     - name: Get NPM Cache Dir
       id: npm-cache-dir
       run: cho "dir=$(npm config get cache)" >> ${GITHUB_OUTPUT}
+      shell: bash
     
     - name: NPM Cache
       id: npm-cache
