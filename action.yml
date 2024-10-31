@@ -25,12 +25,12 @@ runs:
       uses: actions/setup-node@v4
       with:
         node-version: ${{ inputs.node-version }}
-        cache: npm
+        cache: 'npm'
 
     - name: Install Salesforce CLI, Vlocity, and Plugins
       if: steps.node-setup.outputs.cache-hit != 'true'
       run: |
-        npm install --global @salesforce/cli vlocity dotenv-cli &&\
+        npm install @salesforce/cli vlocity dotenv-cli &&\
         echo "y" | sf plugins install @salesforce/sfdx-scanner @salesforce/acu-pack@2.0.4
       shell: bash
 
