@@ -28,26 +28,26 @@ runs:
         cache: 'npm'
 
     - name: Get NPM Cache Dir
-      id: npm-cache-dir
-      run: echo "dir=$(npm config get cache)" >> ${GITHUB_OUTPUT}
+      id: npm-tool-cache-dir
+      run: echo "dir=$(npm root -g)" >> ${GITHUB_OUTPUT}
       shell: bash
     
     - name: NPM Cache
-      id: npm-cache
+      id: npm-tool-cache
       uses: actions/cache@v4
       with:
-        path: |
-          ${{ steps.npm-cache-dir.outputs.dir }}
-          **/node-modules
+        path: ${{ steps.npm-tool-cache-dir.outputs.dir }}
         key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
         restore-keys: |
           ${{ runner.os }}-node-
 
     - name: Install Salesforce CLI, Vlocity, and Plugins
-      if: steps.npm-cache.outputs.cache-hit != 'true'
-      run: |
-        npm install --global @salesforce/cli vlocity dotenv-cli &&\
-        echo "y" | sf plugins install @salesforce/sfdx-scanner @salesforce/acu-pack@2.0.4
+      if: steps.npm-tool-cache.outputs.cache-hit != 'true'
+      run: npm install --global @salesforce/cli vlocity dotenv-cli
+      shell: bash
+
+    - name: Install Salesforce CLI Plugins
+      run: echo "y" | sf plugins install @salesforce/sfdx-scanner @salesforce/acu-pack@2.0.4
       shell: bash
 
     - name: Install Python Plugins
