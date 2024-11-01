@@ -36,7 +36,9 @@ runs:
       id: npm-cache
       uses: actions/cache@v4
       with:
-        path: ${{ steps.npm-cache-dir.outputs.dir }}
+        path: |
+          ${{ steps.npm-cache-dir.outputs.dir }}
+          **/node-modules
         key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
         restore-keys: |
           ${{ runner.os }}-node-
