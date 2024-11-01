@@ -26,6 +26,11 @@ runs:
       with:
         node-version: ${{ inputs.node-version }}
         cache: 'npm'
+    
+    - if: ${{ steps.node-setup.outputs.cache-hit != 'true' }}
+      name: List the state of node modules
+      continue-on-error: true
+      run: npm list -g
 
     - name: Install Salesforce CLI, Vlocity, and Plugins
       run: npm install --global @salesforce/cli vlocity dotenv-cli
