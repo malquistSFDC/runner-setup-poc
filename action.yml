@@ -31,6 +31,7 @@ runs:
       name: List the state of node modules
       continue-on-error: true
       run: npm list -g
+      shell: bash
 
     - name: Install Salesforce CLI, Vlocity, and Plugins
       run: npm install --global @salesforce/cli vlocity dotenv-cli
