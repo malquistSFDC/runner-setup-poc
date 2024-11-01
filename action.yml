@@ -27,27 +27,8 @@ runs:
         node-version: ${{ inputs.node-version }}
         cache: 'npm'
 
-    # - name: Get NPM Cache Dir
-    #   id: npm-tool-cache-dir
-    #   run: echo "dir=$(npm root -g)" >> ${GITHUB_OUTPUT}
-    #   shell: bash
-    
-    # - name: NPM Cache
-    #   id: npm-tool-cache
-    #   uses: actions/cache@v4
-    #   with:
-    #     path: ${{ steps.npm-tool-cache-dir.outputs.dir }}
-    #     key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-    #     restore-keys: |
-    #       ${{ runner.os }}-node-
-
     - name: Install Salesforce CLI, Vlocity, and Plugins
-      if: ${{ steps.node-setup.outputs.cache-hit != 'true' }}
       run: npm install --global @salesforce/cli vlocity dotenv-cli
-      shell: bash
-
-    - name: Install Salesforce CLI, Vlocity, and Plugins
-      run: npm ci
       shell: bash
 
     - name: Install Salesforce CLI Plugins
