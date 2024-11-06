@@ -31,7 +31,7 @@ runs:
       shell: bash
 
     - name: Install Salesforce CLI, Vlocity, and Plugins
-      run: npm install --global @salesforce/cli vlocity dotenv-cli
+      run: npm install
       shell: bash
 
     - name: Install Salesforce CLI Plugins
