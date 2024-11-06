@@ -31,6 +31,7 @@ runs:
       shell: bash
 
     - name: Install Salesforce CLI, Vlocity, and Plugins
+      if: ${{ steps.node-setup.outputs.cache-hit != 'true' }}
       run: npm install
       shell: bash
 
