@@ -34,9 +34,9 @@ runs:
       run: npm install
       shell: bash
 
-    - name: Install Salesforce CLI Plugins
-      run: echo "y" | sf plugins install @salesforce/sfdx-scanner @salesforce/acu-pack@2.0.4
-      shell: bash
+    # - name: Install Salesforce CLI Plugins
+    #   run: echo "y" | sf plugins install @salesforce/sfdx-scanner @salesforce/acu-pack@2.0.4
+    #   shell: bash
 
     # - name: Install Python Plugins
     #   run: python3 -m pip install pyyaml
