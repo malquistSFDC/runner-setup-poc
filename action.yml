@@ -14,10 +14,7 @@ runs:
     - uses: actions/checkout@v4
 
     - name: Install Python3-Pip
-      run: |
-        sudo apt-get update && \
-        sudo apt-get install -y \
-        python3-pip
+      run: sudo apt-get update
       shell: bash
 
     - name: Install Node.js
@@ -41,6 +38,6 @@ runs:
       run: echo "y" | sf plugins install @salesforce/sfdx-scanner @salesforce/acu-pack@2.0.4
       shell: bash
 
-    - name: Install Python Plugins
-      run: python3 -m pip install pyyaml
-      shell: bash
+    # - name: Install Python Plugins
+    #   run: python3 -m pip install pyyaml
+    #   shell: bash
