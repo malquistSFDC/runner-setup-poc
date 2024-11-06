@@ -24,14 +24,13 @@ runs:
         node-version: ${{ inputs.node-version }}
         cache: 'npm'
     
-    - if: ${{ steps.node-setup.outputs.cache-hit == 'true' }}
+    - if: ${{ steps.node-setup.outputs.cache-hit != 'true' }}
       name: List the state of node modules
       continue-on-error: true
       run: npm list
       shell: bash
 
     - name: Install Salesforce CLI, Vlocity, and Plugins
-      if: ${{ steps.node-setup.outputs.cache-hit != 'true' }}
       run: npm install
       shell: bash
 
