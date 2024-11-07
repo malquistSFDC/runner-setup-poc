@@ -22,9 +22,7 @@ runs:
       id: node-cache
       with:
         path: node_modules
-        key: ${{ runner.os }}-${{ hashFiles('package-lock.json') }}
-        restore-keys: |
-          ${{ runner.os }}-
+        key: ${{ runner.os }}-Test-Cache
     
     - if: ${{ steps.node-cache.outputs.cache-hit != 'true' }}
       name: List the state of node modules
