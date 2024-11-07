@@ -24,7 +24,6 @@ runs:
         path: node_modules
         key: ${{ runner.os }}-${{ hashFiles('package-lock.json') }}
         restore-keys: |
-          ${{ runner.os }}-build-
           ${{ runner.os }}-
     
     - if: ${{ steps.node-cache.outputs.cache-hit != 'true' }}
